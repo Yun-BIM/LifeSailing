@@ -21,8 +21,6 @@
     .result-container {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      gap: 2rem;
       margin-top: 2rem;
       flex-wrap: wrap;
     }
@@ -38,8 +36,8 @@
       text-align: left;
     }
     .character-info {
+      margin-top: 1rem;
       display: flex;
-      align-items: center;
       justify-content: center;
     }
     #character-img {
@@ -55,6 +53,9 @@
     <h2 id="result-title"></h2>
     <p id="result-desc"></p>
     <p id="result-role"></p>
+    <div class="character-info">
+      <img id="character-img" src="" alt="">
+    </div>
   </div>
   <div class="result-container">
     <div class="text-info">
@@ -101,7 +102,7 @@
       "露娜型": {work:"哈利波特", trait:"神祕獨特、自在真誠", metaphor:"別人還在岸上時你已啟航，卻無人看懂", tip:"被理解不是必須，被堅持才重要", img:"https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=401&q=60"},
       "妙麗型": {work:"哈利波特", trait:"勤奮博學、思慮周詳", metaphor:"總想以完美解答安撫不確定", tip:"知識是助力，也別忘了傾聽內心", img:"https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=400&q=60"},
       "巴斯型": {work:"玩具總動員", trait:"理想主義、轉變能力高", metaphor:"重塑自我信念的旅途中", tip:"超越邊界從放下開始", img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=401&q=60"},
-      "小叉型": {work:"玩具總動員", trait:"好奇懷疑、自我定義中", metaphor:"剛被創造，學習如何活著", tip:"你不是沒有用處，是重新發現意義的奇蹟", img:"https://images.unsplash.com/photo-1589571894960-20bbe2828a27?auto=format&fit=crop&w=400&q=60"},
+      "小叉型": {work:"玩具總動員", trait:"好奇懷疑、自我定義中", metaphor:"剛被創造，學習如何活著", tip:"你不是沒有用處，是重新發現意義的奇蹟", img:"image/Role-13.png"},
       "翠絲型": {work:"玩具總動員", trait:"勇敢、有故事、有脆弱", metaphor:"曾被遺忘，如今渴望被珍惜", tip:"遺落的過去可成前進燃料", img:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=404&q=60"},
       "歐比王型": {work:"星際大戰", trait:"沉穩睿智、指導他人", metaphor:"幫助別人中遺失自己", tip:"成為導師前，先成為完整的自己", img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=401&q=60"},
       "黛西型": {work:"星際大戰", trait:"勇敢、追尋根源", metaphor:"有使命感，在驗證自己是誰", tip:"你不是誰的複製，而是新時代開端", img:"https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=401&q=60"},
@@ -142,7 +143,7 @@
       if (img) {
         img.src = info.img || '';
         img.alt = picked;
-      }      
+      }   
     } else {
       document.getElementById('result-title').textContent = '無法判斷結果';
     }
