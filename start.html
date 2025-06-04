@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>開始測驗</title>
+  <style>
+    body { font-family: 'Helvetica Neue', sans-serif; text-align: center; padding: 3rem; background-color: #f9fafb; }
+    .start-btn { padding: 1rem 2rem; background-color: #0070f3; color: white; border: none; border-radius: 8px; font-size: 1.2rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>人生導航心理測驗</h1>
+  <p>本測驗共有六題，將依你的選項判斷內在階段與外在情境。</p>
+  <button class="start-btn" onclick="startTest()">開始</button>
+  <script>
+    function startTest() {
+      const keys = ['A1','A2','A3','A4','B1','B2','B3','B4'];
+      keys.forEach(k => sessionStorage.setItem(k, '0'));
+      sessionStorage.removeItem('tiebreakA');
+      sessionStorage.removeItem('tiebreakB');
+      location.href = 'question-1-page.html';
+    }
+  </script>
+</body>
+</html>

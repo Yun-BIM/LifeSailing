@@ -64,25 +64,41 @@
   <body>
     <div class="container">
       <h2>你的人際／工作支持系統是？</h2>
-      <div class="options">
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=不確定誰能幫" alt="不知道誰能幫上忙">
-          <p>很多不確定、不知道誰能幫上忙</p>
+      <form id="form">
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q5" value="B1" hidden>
+            <img src="https://via.placeholder.com/300x140?text=不確定誰能幫" alt="不知道誰能幫上忙">
+            <p>很多不確定、不知道誰能幫上忙</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="B2" hidden>
+            <img src="https://via.placeholder.com/300x140?text=有人但沒時間靠近" alt="有人但沒時間靠近">
+            <p>感覺有人在，但沒時間靠近</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="B3" hidden>
+            <img src="https://via.placeholder.com/300x140?text=穩定關係還不錯" alt="穩定支持關係還不錯">
+            <p>有幾個穩定支持的人，關係還不錯</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q5" value="B4" hidden>
+            <img src="https://via.placeholder.com/300x140?text=功能導向效率互動" alt="功能導向互動">
+            <p>多半是功能導向的互動，講求效率</p>
+          </label>
         </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=有人但沒時間靠近" alt="有人但沒時間靠近">
-          <p>感覺有人在，但沒時間靠近</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=穩定關係還不錯" alt="穩定支持關係還不錯">
-          <p>有幾個穩定支持的人，關係還不錯</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=功能導向效率互動" alt="功能導向互動">
-          <p>多半是功能導向的互動，講求效率</p>
-        </div>
-      </div>
-      <button class="next-button" onclick="location.href='q5-transition.html'">下一題</button>
+        <button type="button" class="next-button" onclick="submitAnswer()">下一題</button>
+      </form>
+      <script>
+        function submitAnswer(){
+          const choice = document.querySelector('input[name="q5"]:checked');
+          if(!choice){ alert('請選擇一個選項'); return; }
+          const key = choice.value;
+          const count = parseInt(sessionStorage.getItem(key) || '0');
+          sessionStorage.setItem(key, count + 1);
+          location.href = 'q5-transition-page.html';
+        }
+      </script>
     </div>
   </body>
 </html>
