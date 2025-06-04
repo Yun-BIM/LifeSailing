@@ -7,6 +7,8 @@
     body { font-size: 18px; font-family: 'Helvetica Neue', sans-serif; text-align: center; padding: 2rem; background-color: #f9fafb; }
     h1 { font-size: 2rem; margin-bottom: 1rem; }
     .result { margin-top: 2rem; }
+    #character { margin-top: 1.5rem; }
+    #character h3 { margin: 0.5rem 0; }
   </style>
 </head>
 <body>
@@ -15,9 +17,16 @@
     <h2 id="result-title"></h2>
     <p id="result-desc"></p>
     <p id="result-role"></p>
+    <div id="character">
+      <h3 id="role-name"></h3>
+      <p id="role-series"></p>
+      <p id="role-trait"></p>
+      <p id="role-metaphor"></p>
+      <p id="role-tip"></p>
+    </div>
   </div>
   <script>
-    const RESULTS = {
+  const RESULTS = {
       "A1B1": {title:"起霧的小艇",desc:"剛覺醒但環境混亂，內外皆不明，正需要找到個人定位",role:"小叉型、榮恩型"},
       "A1B2": {title:"混水試航者",desc:"起點就遇挑戰，激起你尋找自我與避風港的渴望",role:"安娜型、喬巴型"},
       "A1B3": {title:"初風起帆者",desc:"環境支持你出發，內心雖迷茫但正是好奇探索的最佳時刻",role:"魯夫型、奧拉夫型"},
@@ -36,6 +45,25 @@
       "A4B4": {title:"領航決勝者",desc:"在成就高峰中尋找\u201c我存在的意義是什麼\u201d，是深度與高效並行的挑戰者",role:"黛西型、索隆型"}
     };
 
+    const CHARACTERS = {
+      "索隆型": {work:"航海王", trait:"意志如刀、對目標絕對忠誠", metaphor:"已知方向，但外界雜音干擾行動力", tip:"偏航是為了再次確認座標"},
+      "喬巴型": {work:"航海王", trait:"敏感溫暖、擅長照顧他人", metaphor:"是眾人的備糧，卻少有自我補給", tip:"你也值得接住自己"},
+      "魯夫型": {work:"航海王", trait:"熱血直率、忠於內心", metaphor:"衝在前線卻渴望被理解", tip:"行動力需要航行圖指引"},
+      "艾莎型": {work:"冰雪奇緣", trait:"深沉強大、習慣獨行", metaphor:"冰封只是保護柔軟的內心", tip:"你不需完美才值得被接納"},
+      "安娜型": {work:"冰雪奇緣", trait:"樂觀執著、愛與希望", metaphor:"等待他人卻也需要陽光照自己", tip:"給自己一份愛是必要的"},
+      "克斯托夫型": {work:"冰雪奇緣", trait:"誠懇安穩、獨立又顧人", metaphor:"穩定港灣但也會迷航", tip:"容許他人為你導航"},
+      "奧拉夫型": {work:"冰雪奇緣", trait:"天真幽默、充滿想像力", metaphor:"幽默是包裹的脆弱", tip:"你有讓冰地開花的能力"},
+      "哈利型": {work:"哈利波特", trait:"直覺強、負責任", metaphor:"被推向焦點也懷疑是否準備好", tip:"「我是誰」來自你怎麼選擇當下"},
+      "榮恩型": {work:"哈利波特", trait:"忠誠有趣、有時自我懷疑", metaphor:"常站在光芒旁，卻忘了自己也能發光", tip:"你不是配角，只是還沒站到船首"},
+      "露娜型": {work:"哈利波特", trait:"神祕獨特、自在真誠", metaphor:"別人還在岸上時你已啟航，卻無人看懂", tip:"被理解不是必須，被堅持才重要"},
+      "巴斯型": {work:"玩具總動員", trait:"理想主義、轉變能力高", metaphor:"重塑自我信念的旅途中", tip:"超越邊界從放下開始"},
+      "小叉型": {work:"玩具總動員", trait:"好奇懷疑、自我定義中", metaphor:"剛被創造，學習如何活著", tip:"你不是沒有用處，是重新發現意義的奇蹟"},
+      "翠絲型": {work:"玩具總動員", trait:"勇敢、有故事、有脆弱", metaphor:"曾被遺忘，如今渴望被珍惜", tip:"遺落的過去可成前進燃料"},
+      "歐比王型": {work:"星際大戰", trait:"沉穩睿智、指導他人", metaphor:"幫助別人中遺失自己", tip:"成為導師前，先成為完整的自己"},
+      "黛西型": {work:"星際大戰", trait:"勇敢、追尋根源", metaphor:"有使命感，在驗證自己是誰", tip:"你不是誰的複製，而是新時代開端"},
+      "韓索羅型": {work:"星際大戰", trait:"自由靈魂、重情重義", metaphor:"帥氣獨行，卻渴望為某人返航", tip:"問自己真正想為誰啟航"}
+    };
+    
     function pick(group, tieKey) {
       let max = -1; let winners = [];
       for (const key of group) {
@@ -56,7 +84,16 @@
     if (result) {
       document.getElementById('result-title').textContent = result.title;
       document.getElementById('result-desc').textContent = result.desc;
-      document.getElementById('result-role').textContent = '推薦角色：' + result.role;
+      const roles = result.role.split('、');
+      const second = new Date().getSeconds();
+      const picked = (second % 2 === 1) ? roles[0] : roles[1];
+      const info = CHARACTERS[picked] || {};
+      document.getElementById('result-role').textContent = '推薦角色：' + picked;
+      document.getElementById('role-name').textContent = picked;
+      document.getElementById('role-series').textContent = '所屬作品：' + (info.work || '');
+      document.getElementById('role-trait').textContent = '代表特質：' + (info.trait || '');
+      document.getElementById('role-metaphor').textContent = '處境隱喻：' + (info.metaphor || '');
+      document.getElementById('role-tip').textContent = '航行提示：' + (info.tip || '');
     } else {
       document.getElementById('result-title').textContent = '無法判斷結果';
     }
