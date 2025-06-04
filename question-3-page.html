@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>第 3 題｜人生導航測驗</title>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
+        color: #333;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 2rem;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .option {
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        background: white;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .option:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .option img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
+      .option p {
+        margin: 0;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      .next-button {
+        margin-top: 2rem;
+        padding: 0.8rem 1.5rem;
+        background-color: #0070f3;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>你目前的內在感受最接近哪一句？</h2>
+      <div class="options">
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=開始意識想改變" alt="開始意識想改變">
+          <p>我剛開始意識到我想要改變</p>
+        </div>
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=正在離開某狀態" alt="正在離開某狀態">
+          <p>我正在嘗試離開某個狀態／轉換角色</p>
+        </div>
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=想看見成效" alt="想看見成效">
+          <p>我在做事，想看見具體成效</p>
+        </div>
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=整合經驗傳遞" alt="整合經驗傳遞">
+          <p>我想整合經驗，做出一些傳遞或引導</p>
+        </div>
+      </div>
+      <button class="next-button" onclick="location.href='q3-transition.html'">下一題</button>
+    </div>
+  </body>
+</html>
