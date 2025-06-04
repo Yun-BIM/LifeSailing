@@ -64,25 +64,41 @@
   <body>
     <div class="container">
       <h2>你目前最常思考的是？</h2>
-      <div class="options">
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=我到底想要什麼" alt="我到底想要什麼">
-          <p>我到底想要什麼？我適合什麼？</p>
+      <form id="form">
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q2" value="A1" hidden>
+            <img src="https://via.placeholder.com/300x140?text=我到底想要什麼" alt="我到底想要什麼">
+            <p>我到底想要什麼？我適合什麼？</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="A2" hidden>
+            <img src="https://via.placeholder.com/300x140?text=調整生活節奏" alt="調整生活節奏">
+            <p>怎麼調整現在的生活步調？</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="A3" hidden>
+            <img src="https://via.placeholder.com/300x140?text=執行目標" alt="執行目標">
+            <p>我怎麼讓目標執行得更好？</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q2" value="A4" hidden>
+            <img src="https://via.placeholder.com/300x140?text=為世界做什麼" alt="為世界做什麼">
+            <p>我能為他人／世界做點什麼？</p>
+          </label>
         </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=調整生活節奏" alt="調整生活節奏">
-          <p>怎麼調整現在的生活步調？</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=執行目標" alt="執行目標">
-          <p>我怎麼讓目標執行得更好？</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=為世界做什麼" alt="為世界做什麼">
-          <p>我能為他人／世界做點什麼？</p>
-        </div>
-      </div>
-      <button class="next-button" onclick="location.href='q2-transition.html'">下一題</button>
+        <button type="button" class="next-button" onclick="submitAnswer()">下一題</button>
+      </form>
+      <script>
+        function submitAnswer(){
+          const choice = document.querySelector('input[name="q2"]:checked');
+          if(!choice){ alert('請選擇一個選項'); return; }
+          const key = choice.value;
+          const count = parseInt(sessionStorage.getItem(key) || '0');
+          sessionStorage.setItem(key, count + 1);
+          location.href = 'q2-transition-page.html';
+        }
+      </script>
     </div>
   </body>
 </html>
