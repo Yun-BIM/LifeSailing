@@ -64,25 +64,42 @@
   <body>
     <div class="container">
       <h2>你目前的內在感受最接近哪一句？</h2>
-      <div class="options">
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=開始意識想改變" alt="開始意識想改變">
-          <p>我剛開始意識到我想要改變</p>
+      <form id="form">
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q3" value="A1" hidden>
+            <img src="https://via.placeholder.com/300x140?text=開始意識想改變" alt="開始意識想改變">
+            <p>我剛開始意識到我想要改變</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="A2" hidden>
+            <img src="https://via.placeholder.com/300x140?text=正在離開某狀態" alt="正在離開某狀態">
+            <p>我正在嘗試離開某個狀態／轉換角色</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="A3" hidden>
+            <img src="https://via.placeholder.com/300x140?text=想看見成效" alt="想看見成效">
+            <p>我在做事，想看見具體成效</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q3" value="A4" hidden>
+            <img src="https://via.placeholder.com/300x140?text=整合經驗傳遞" alt="整合經驗傳遞">
+            <p>我想整合經驗，做出一些傳遞或引導</p>
+          </label>
         </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=正在離開某狀態" alt="正在離開某狀態">
-          <p>我正在嘗試離開某個狀態／轉換角色</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=想看見成效" alt="想看見成效">
-          <p>我在做事，想看見具體成效</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=整合經驗傳遞" alt="整合經驗傳遞">
-          <p>我想整合經驗，做出一些傳遞或引導</p>
-        </div>
-      </div>
-      <button class="next-button" onclick="location.href='q3-transition.html'">下一題</button>
+        <button type="button" class="next-button" onclick="submitAnswer()">下一題</button>
+      </form>
+      <script>
+        function submitAnswer(){
+          const choice = document.querySelector('input[name="q3"]:checked');
+          if(!choice){ alert('請選擇一個選項'); return; }
+          const key = choice.value;
+          const count = parseInt(sessionStorage.getItem(key) || '0');
+          sessionStorage.setItem(key, count + 1);
+          sessionStorage.setItem('tiebreakA', key);
+          location.href = 'q3-transition-page.html';
+        }
+      </script>
     </div>
   </body>
 </html>
