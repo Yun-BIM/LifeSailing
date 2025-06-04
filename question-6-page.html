@@ -64,25 +64,42 @@
   <body>
     <div class="container">
       <h2>你目前的生活節奏是？</h2>
-      <div class="options">
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=有點亂" alt="不知道該先做什麼，有點亂">
-          <p>不知道該先做什麼，有點亂</p>
+      <form id="form">
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q6" value="B1" hidden>
+            <img src="https://via.placeholder.com/300x140?text=有點亂" alt="不知道該先做什麼，有點亂">
+            <p>不知道該先做什麼，有點亂</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="B2" hidden>
+            <img src="https://via.placeholder.com/300x140?text=事多但不安" alt="事很多但內心沒安全感">
+            <p>事很多但內心沒安全感</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="B3" hidden>
+            <img src="https://via.placeholder.com/300x140?text=節奏平衡" alt="節奏平衡，能掌控節奏">
+            <p>節奏平衡，能掌控節奏</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q6" value="B4" hidden>
+            <img src="https://via.placeholder.com/300x140?text=壓力大" alt="排得很滿、進度壓力大">
+            <p>排得很滿、進度壓力大</p>
+          </label>
         </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=事多但不安" alt="事很多但內心沒安全感">
-          <p>事很多但內心沒安全感</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=節奏平衡" alt="節奏平衡，能掌控節奏">
-          <p>節奏平衡，能掌控節奏</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=壓力大" alt="排得很滿、進度壓力大">
-          <p>排得很滿、進度壓力大</p>
-        </div>
-      </div>
-      <button class="next-button" onclick="location.href='q6-transition.html'">下一題</button>
+        <button type="button" class="next-button" onclick="submitAnswer()">下一題</button>
+      </form>
+      <script>
+        function submitAnswer(){
+          const choice = document.querySelector('input[name="q6"]:checked');
+          if(!choice){ alert('請選擇一個選項'); return; }
+          const key = choice.value;
+          const count = parseInt(sessionStorage.getItem(key) || '0');
+          sessionStorage.setItem(key, count + 1);
+          sessionStorage.setItem('tiebreakB', key);
+          location.href = 'q6-transition-page.html';
+        }
+      </script>
     </div>
   </body>
 </html>
