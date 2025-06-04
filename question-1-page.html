@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>第 1 題｜人生導航測驗</title>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9fafb;
+        color: #333;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 2rem;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .option {
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        background: white;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .option:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .option img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
+      .option p {
+        margin: 0;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      .next-button {
+        margin-top: 2rem;
+        padding: 0.8rem 1.5rem;
+        background-color: #0070f3;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>你對未來的感覺是？</h2>
+      <div class="options">
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=模糊但有方向" alt="模糊但有方向">
+          <p>有點模糊，但我開始有些方向</p>
+        </div>
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=重新思考方向" alt="重新思考方向">
+          <p>正在重新思考方向，有點卡住</p>
+        </div>
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=方向清楚" alt="方向清楚">
+          <p>方向清楚，我已在努力邁進</p>
+        </div>
+        <div class="option">
+          <img src="https://via.placeholder.com/300x140?text=尋找意義" alt="尋找意義">
+          <p>我想找到更深的意義和影響力</p>
+        </div>
+      </div>
+      <button class="next-button" onclick="location.href='q1-transition.html'">下一題</button>
+    </div>
+  </body>
+</html>
