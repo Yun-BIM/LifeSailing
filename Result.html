@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>測驗結果</title>
+  <style>
+    body { font-family: 'Helvetica Neue', sans-serif; text-align: center; padding: 2rem; background-color: #f9fafb; }
+    h1 { font-size: 2rem; margin-bottom: 1rem; }
+    .result { margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>測驗結果</h1>
+  <div class="result">
+    <h2 id="result-title"></h2>
+    <p id="result-desc"></p>
+    <p id="result-role"></p>
+  </div>
+  <script>
+    const RESULTS = {
+      "A1B1": {title:"起霧的小艇",desc:"剛覺醒但環境混亂，內外皆不明，正需要找到個人定位",role:"小叉型、榮恩型"},
+      "A1B2": {title:"混水試航者",desc:"起點就遇挑戰，激起你尋找自我與避風港的渴望",role:"安娜型、喬巴型"},
+      "A1B3": {title:"初風起帆者",desc:"環境支持你出發，內心雖迷茫但正是好奇探索的最佳時刻",role:"魯夫型、奧拉夫型"},
+      "A1B4": {title:"青雲懵懂者",desc:"在高期望中探索自我，常感到\u201c我要快點知道我是誰\u201d的焦慮",role:"妙麗型、黛西型"},
+      "A2B1": {title:"模糊的轉身",desc:"想調整方向，但內外都不明確，需深層自我覺察",role:"露娜型、小叉型"},
+      "A2B2": {title:"急流轉舵者",desc:"生命正值動盪交界，你渴望重整旗鼓再上路",role:"克斯托夫型、翠絲型"},
+      "A2B3": {title:"轉機調和者",desc:"外部支持你更新方向，是重構人生策略的黃金期",role:"艾莎型、巴斯型"},
+      "A2B4": {title:"高速換軌者",desc:"邊跑邊調整是種技術與勇氣，需要放慢內在節奏才能穩住核心",role:"索隆型、榮恩型"},
+      "A3B1": {title:"視野受限的衝鋒船",desc:"方向清晰但外在模糊，正考驗你的堅持與智慧",role:"哈利型、索隆型"},
+      "A3B2": {title:"強心出擊者",desc:"在困難中堅持前行，是你塑造能力與韌性的關鍵期",role:"魯夫型、歐比王型"},
+      "A3B3": {title:"順流快艇",desc:"人生各面向都 align，適合全力推進、善用資源",role:"黛西型、妙麗型"},
+      "A3B4": {title:"衝線破浪者",desc:"已啟航但前方風浪大，你需要強化內在穩定與策略應變能力",role:"韓索羅型、巴斯型"},
+      "A4B1": {title:"靜心觀海者",desc:"時代變動加劇，但你在沉靜中觀察，尋求\u201c此刻該傳什麼？\u201d",role:"露娜型、艾莎型"},
+      "A4B2": {title:"穩舵的老船長",desc:"經驗豐富，願意承擔風險與陪伴他人航行，是他人靈魂的導航者",role:"歐比王型、克斯托夫型"},
+      "A4B3": {title:"星圖編織者",desc:"成就與智慧都到位，是人生策略與價值的整合者",role:"韓索羅型、哈利型"},
+      "A4B4": {title:"領航決勝者",desc:"在成就高峰中尋找\u201c我存在的意義是什麼\u201d，是深度與高效並行的挑戰者",role:"黛西型、索隆型"}
+    };
+
+    function pick(group, tieKey) {
+      let max = -1; let winners = [];
+      for (const key of group) {
+        const val = parseInt(sessionStorage.getItem(key) || '0');
+        if (val > max) { max = val; winners = [key]; }
+        else if (val === max) { winners.push(key); }
+      }
+      if (winners.length > 1) {
+        const tiebreak = sessionStorage.getItem(tieKey);
+        if (tiebreak && winners.includes(tiebreak)) return tiebreak;
+      }
+      return winners[0];
+    }
+
+    const A = pick(['A1','A2','A3','A4'], 'tiebreakA');
+    const B = pick(['B1','B2','B3','B4'], 'tiebreakB');
+    const result = RESULTS[A + B];
+    if (result) {
+      document.getElementById('result-title').textContent = result.title;
+      document.getElementById('result-desc').textContent = result.desc;
+      document.getElementById('result-role').textContent = '推薦角色：' + result.role;
+    } else {
+      document.getElementById('result-title').textContent = '無法判斷結果';
+    }
+  </script>
+</body>
+</html>
