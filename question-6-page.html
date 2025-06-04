@@ -39,6 +39,12 @@
       .option:hover {
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       }
+      .option.selected {
+        border: 2px solid #0070f3;
+      }
+      .option.selected p {
+        font-weight: bold;
+      }
       .option img {
         width: 100%;
         height: 140px;
@@ -99,6 +105,14 @@
           sessionStorage.setItem('tiebreakB', key);
           location.href = 'q6-transition-page.html';
         }
+        document.querySelectorAll('.option input').forEach(input => {
+          input.addEventListener('change', () => {
+            document.querySelectorAll('.option').forEach(opt =>
+              opt.classList.remove('selected')
+            );
+            input.closest('.option').classList.add('selected');
+          });
+        });
       </script>
     </div>
   </body>
