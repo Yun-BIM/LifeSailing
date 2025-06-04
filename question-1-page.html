@@ -64,25 +64,41 @@
   <body>
     <div class="container">
       <h2>你對未來的感覺是？</h2>
-      <div class="options">
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=模糊但有方向" alt="模糊但有方向">
-          <p>有點模糊，但我開始有些方向</p>
+      <form id="form">
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="q1" value="A1" hidden>
+            <img src="https://via.placeholder.com/300x140?text=模糊但有方向" alt="模糊但有方向">
+            <p>有點模糊，但我開始有些方向</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="A2" hidden>
+            <img src="https://via.placeholder.com/300x140?text=重新思考方向" alt="重新思考方向">
+            <p>正在重新思考方向，有點卡住</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="A3" hidden>
+            <img src="https://via.placeholder.com/300x140?text=方向清楚" alt="方向清楚">
+            <p>方向清楚，我已在努力邁進</p>
+          </label>
+          <label class="option">
+            <input type="radio" name="q1" value="A4" hidden>
+            <img src="https://via.placeholder.com/300x140?text=尋找意義" alt="尋找意義">
+            <p>我想找到更深的意義和影響力</p>
+          </label>
         </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=重新思考方向" alt="重新思考方向">
-          <p>正在重新思考方向，有點卡住</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=方向清楚" alt="方向清楚">
-          <p>方向清楚，我已在努力邁進</p>
-        </div>
-        <div class="option">
-          <img src="https://via.placeholder.com/300x140?text=尋找意義" alt="尋找意義">
-          <p>我想找到更深的意義和影響力</p>
-        </div>
-      </div>
-      <button class="next-button" onclick="location.href='q1-transition.html'">下一題</button>
+        <button type="button" class="next-button" onclick="submitAnswer()">下一題</button>
+      </form>
+      <script>
+        function submitAnswer(){
+          const choice = document.querySelector('input[name="q1"]:checked');
+          if(!choice){ alert('請選擇一個選項'); return; }
+          const key = choice.value;
+          const count = parseInt(sessionStorage.getItem(key) || '0');
+          sessionStorage.setItem(key, count + 1);
+          location.href = 'q1-transition-page.html';
+        }
+      </script>
     </div>
   </body>
 </html>
