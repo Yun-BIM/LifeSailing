@@ -92,30 +92,15 @@
   let picked = '';
 
   function shareResult() {
-    const shareUrl = 'Index.html';
-    const text = '我是 ' + picked + '，一起探索人生航行配對！';
-    const data = { title: '人生航行角色配對', text, url: shareUrl };
+    const text = '我的角色互補配對是 ' + picked;
+    const data = { title: '人生航行角色配對', text, url: location.href };
     if (navigator.share) {
       navigator.share(data).catch(() => {
         alert('分享失敗，請截圖分享');
       });
-    } else if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text + ' ' + shareUrl)
-        .then(() => {
-          alert('已複製到剪貼簿，快貼給朋友吧！');
-        })
-        .catch(() => {
-          const input = document.createElement('input');
-          input.value = text + ' ' + shareUrl;
-          document.body.appendChild(input);
-          input.select();
-          document.execCommand('copy');
-          document.body.removeChild(input);
-          alert('已複製到剪貼簿，快貼給朋友吧！');
-        });
     } else {
       const input = document.createElement('input');
-      input.value = text + ' ' + shareUrl;
+      input.value = text + ' ' + location.href;
       document.body.appendChild(input);
       input.select();
       document.execCommand('copy');
