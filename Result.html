@@ -95,7 +95,28 @@
     <img id="character-img" src="" alt="">
   </div>
   <script>
-  const RESULTS = {
+  let picked = '';
+
+  function shareResult() {
+    const text = '我的角色互補配對是 ' + picked;
+    const data = { title: '人生航行角色配對', text, url: location.href };
+    if (navigator.share) {
+      navigator.share(data).catch(() => {
+        alert('分享失敗，請截圖分享');
+      });
+    } else {
+      const input = document.createElement('input');
+      input.value = text + ' ' + location.href;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      alert('已複製到剪貼簿，快貼給朋友吧！');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const RESULTS = {
       "A1B1": {title:"起霧的小艇",desc:"剛覺醒但環境混亂，內外皆不明，正需要找到個人定位",role:"小叉型、榮恩型"},
       "A1B2": {title:"混水試航者",desc:"起點就遇挑戰，激起你尋找自我與避風港的渴望",role:"安娜型、喬巴型"},
       "A1B3": {title:"初風起帆者",desc:"環境支持你出發，內心雖迷茫但正是好奇探索的最佳時刻",role:"魯夫型、奧拉夫型"},
@@ -180,6 +201,7 @@
         el.style.display = 'block';
       }
     });
+  });
   </script>
 
 
@@ -241,7 +263,7 @@
   </div>
 
   <div class="cta">
-    <button onclick="alert('分享功能建置中，可透過截圖分享你的角色配對！')">🔗 分享我的航行配對</button>
+    <button onclick="shareResult()">🔗 分享我的航行配對</button>
   </div>
   
   <div class="toolkit-download">
