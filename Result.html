@@ -2,6 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>測驗結果</title>
   <style>
     body {
@@ -14,6 +15,7 @@
     h1 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: #6b6054;
     }
     .summary {
       margin-top: 1.5rem;
@@ -90,15 +92,30 @@
   let picked = '';
 
   function shareResult() {
-    const text = '我的角色互補配對是 ' + picked;
-    const data = { title: '人生航行角色配對', text, url: location.href };
+    const shareUrl = 'Index.html';
+    const text = '我是 ' + picked + '，一起探索人生航行配對！';
+    const data = { title: '人生航行角色配對', text, url: shareUrl };
     if (navigator.share) {
       navigator.share(data).catch(() => {
         alert('分享失敗，請截圖分享');
       });
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text + ' ' + shareUrl)
+        .then(() => {
+          alert('已複製到剪貼簿，快貼給朋友吧！');
+        })
+        .catch(() => {
+          const input = document.createElement('input');
+          input.value = text + ' ' + shareUrl;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+          alert('已複製到剪貼簿，快貼給朋友吧！');
+        });
     } else {
       const input = document.createElement('input');
-      input.value = text + ' ' + location.href;
+      input.value = text + ' ' + shareUrl;
       document.body.appendChild(input);
       input.select();
       document.execCommand('copy');
@@ -172,7 +189,7 @@
       const second = new Date().getSeconds();
       picked = (second % 2 === 1) ? roles[0] : roles[1];
       const info = CHARACTERS[picked] || {};
-      document.getElementById('result-role').textContent = '推薦角色：' + picked;
+      document.getElementById('result-role').textContent = '推薦角色';
       document.getElementById('role-name').textContent = picked;
       document.getElementById('role-series').textContent = '所屬作品：' + (info.work || '');
       document.getElementById('role-trait').textContent = '代表特質：' + (info.trait || '');
