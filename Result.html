@@ -48,15 +48,6 @@
       margin-top: 2rem;
       text-align: center;
     }
-    .download-btn {
-      display: inline-block;
-      padding: 0.8rem 1.6rem;
-      background: #0070f3;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 1.2rem;      font-size: 1.2rem;
-    }
     .email-form {
       margin-top: 2rem;
     }
@@ -239,13 +230,19 @@
     });
     const emailForm = document.getElementById('email-form');
     const emailInput = document.getElementById('email-input');
-    const downloadLink = document.getElementById('role-download');
 
     emailForm.addEventListener('submit', function(e) {
       e.preventDefault();
       if (emailInput.checkValidity()) {
-        if (pdfPath) downloadLink.href = pdfPath;
-        downloadLink.style.display = 'inline-block';
+        if (pdfPath) {
+          const tmp = document.createElement('a');
+          tmp.href = pdfPath;
+          tmp.download = '';
+          document.body.appendChild(tmp);
+          tmp.click();
+          document.body.removeChild(tmp);
+        }
+        emailForm.submit();
       } else {
         emailInput.reportValidity();
       }
@@ -317,7 +314,6 @@
   
   <div class="toolkit-download">
       <p>拿一份專屬工具包，幫你找到下一步方向，不再迷航！</p>
-      <a id="role-download" class="download-btn" href="#" style="display:none" download>下載「專屬角色航行工具五件組」</a>
   </div>
   
   <form action="https://formspree.io/f/xblydllw" method="POST" id="email-form" class="email-form">
