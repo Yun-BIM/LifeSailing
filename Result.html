@@ -129,6 +129,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    if (sessionStorage.getItem('resultVisited')) {
+      location.replace('Index.html');
+      return;
+    }
+    sessionStorage.setItem('resultVisited', '1');
     const RESULTS = {
       "A1B1": {title:"起霧的小艇",desc:"剛覺醒但環境混亂，內外皆不明，正需要找到個人定位",role:"小叉型、榮恩型"},
       "A1B2": {title:"混水試航者",desc:"起點就遇挑戰，激起你尋找自我與避風港的渴望",role:"安娜型、喬巴型"},
@@ -287,6 +292,6 @@
     <input type="email" name="email" required placeholder="you@example.com">
     <button type="submit">寄送「專屬角色航行工具包」到 Email</button>
   </form>
-  <p><a href="Index.html" class="retry-link">我還要再玩一次！</a></p>  
+  <p><a href="Index.html" class="retry-link" onclick="sessionStorage.removeItem('resultVisited');">我還要再玩一次！</a>
 </body>
 </html>
