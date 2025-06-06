@@ -1,1 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>下載人生航行工具包</title>
+</head>
+<body style="font-family:sans-serif;text-align:center;padding:2rem;">
+  <h2>📦 輸入 Email，領取你的專屬工具包</h2>
 
+  <form action="https://formspree.io/f/xblydllw" method="POST">
+    <input type="email" name="email" required placeholder="wywu170@gmail.com" style="padding:0.5rem;width:250px;"><br><br>
+    <button type="submit" style="padding:0.5rem 1rem;">📥 下載工具包</button>
+  </form>
+</body>
+</html>
