@@ -56,6 +56,23 @@
       text-decoration: none;
       border-radius: 6px;
     }
+    .email-form {
+      margin-top: 2rem;
+    }
+    .email-form input[type="email"] {
+      padding: 0.5rem;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .email-form button {
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      background: #0070f3;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
     .pair {
       background: #fff;
       margin: 1rem auto;
@@ -259,6 +276,11 @@
   <div class="cta">
     <button onclick="shareResult()">🔗 分享我的航行配對</button>
   </div>
+
+  <form action="https://formspree.io/f/xblydllw" method="POST" class="email-form">
+    <input type="email" name="email" required placeholder="wywu170@gmail.com">
+    <button type="submit">寄送工具包到 Email</button>
+  </form>
   
   <div class="toolkit-download">
       <a href="LifeSailingToolkit.pdf" class="download-btn" download>下載人生航行模型工具包</a>
