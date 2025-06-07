@@ -112,23 +112,23 @@
   <script>
   let picked = '';
 
-  function shareResult() {
-    const text = '我的角色互補配對是 ' + picked;
-    const data = { title: '人生航行角色配對', text, url: location.href };
-    if (navigator.share) {
-      navigator.share(data).catch(() => {
-        alert('分享失敗，請截圖分享');
+function shareResult() {
+  const text = '我的角色互補配對是 ' + picked;
+  const target = document.body;
+  html2canvas(target).then(canvas => {
+    canvas.toBlob(blob => {
+      const file = new File([blob], 'result.png', {type: 'image/png'});
+      const data = { title: '人生航行角色配對', text };
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        data.files = [file];
+      } else {
+        data.url = location.href;
+      }
+      const share = navigator.share ? navigator.share(data) : Promise.reject();
+      share.catch(() => {
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
       });
-    } else {
-      const input = document.createElement('input');
-      input.value = text + ' ' + location.href;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      alert('已複製到剪貼簿，快貼給朋友吧！');
-    }
-  }
 
   document.addEventListener('DOMContentLoaded', function () {
     if (sessionStorage.getItem('resultVisited')) {
