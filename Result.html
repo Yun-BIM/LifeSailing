@@ -85,12 +85,41 @@
       max-width: 500px;
       display: none;
     }
-    .pair .tagline {
-      font-style: italic;
-      color: #555;
-    }
-  </style>
-</head>
+     .pair .tagline {
+        font-style: italic;
+        color: #555;
+      }
+      .share-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .share-buttons {
+        background: #fff;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .share-buttons a {
+        margin: 0 0.5rem;
+        color: #0070f3;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .share-buttons button {
+        margin-top: 1rem;
+        padding: 0.3rem 0.8rem;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  </head>
 <body>
   <h1>測驗結果</h1>
   <hr>
@@ -111,23 +140,34 @@
   </div>
   <script>
   let picked = '';
+  function showShareOptions() {
+    const url = encodeURIComponent(location.href);
+    const text = encodeURIComponent('我的角色互補配對是 ' + picked);
+    document.getElementById('share-fb').href =
+      'https://www.facebook.com/sharer/sharer.php?u=' + url;
+    document.getElementById('share-ig').href = 'https://www.instagram.com/';
+    document.getElementById('share-x').href =
+      'https://twitter.com/intent/tweet?text=' + text + '&url=' + url;
+    document.getElementById('share-thread').href = 'https://www.threads.net/';
+    document.getElementById('share-overlay').style.display = 'flex';
+  }
+
+  function hideShare() {
+    document.getElementById('share-overlay').style.display = 'none';
+  }
 
   function shareResult() {
-    const text = '我的角色互補配對是 ' + picked;
-    const data = { title: '人生航行角色配對', text, url: location.href };
-    if (navigator.share) {
-      navigator.share(data).catch(() => {
-        alert('分享失敗，請截圖分享');
+    html2canvas(document.body).then(canvas => {
+      canvas.toBlob(blob => {
+        if (navigator.clipboard && window.ClipboardItem) {
+          const item = new ClipboardItem({'image/png': blob});
+          navigator.clipboard.write([item]).then(showShareOptions)
+            .catch(() => { alert('複製失敗，請自行截圖分享'); showShareOptions(); });
+        } else {
+          showShareOptions();
+        }
       });
-    } else {
-      const input = document.createElement('input');
-      input.value = text + ' ' + location.href;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      alert('已複製到剪貼簿，快貼給朋友吧！');
-    }
+    });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -192,7 +232,7 @@
     const A = pick(['A1','A2','A3','A4'], 'tiebreakA');
     const B = pick(['B1','B2','B3','B4'], 'tiebreakB');
     const result = RESULTS[A + B];
-    let picked = '';
+    picked = '';
     let pdfPath = '';
     if (result) {
       document.getElementById('result-title').textContent = result.title;
@@ -311,7 +351,20 @@
   <div class="cta">
     <button onclick="shareResult()">🔗 分享我的航行配對</button>
   </div>
-  
+
+  <div id="share-overlay" class="share-overlay">
+    <div class="share-buttons">
+      <p>選擇要分享的平台：</p>
+      <a id="share-fb" target="_blank">Facebook</a>
+      <a id="share-ig" target="_blank">IG</a>
+      <a id="share-x" target="_blank">X</a>
+      <a id="share-thread" target="_blank">Threads</a>
+      <div>
+        <button type="button" onclick="hideShare()">關閉</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toolkit-download">
       <p>拿一份專屬工具包，幫你找到下一步方向，不再迷航！</p>
   </div>
