@@ -129,6 +129,9 @@ function shareResult() {
         const url = URL.createObjectURL(blob);
         window.open(url, '_blank');
       });
+    });
+  });
+}
 
   document.addEventListener('DOMContentLoaded', function () {
     if (sessionStorage.getItem('resultVisited')) {
