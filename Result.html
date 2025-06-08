@@ -184,9 +184,14 @@
   function shareResult() {
     html2canvas(document.body).then(canvas => {
       canvas.toBlob(blob => {
+        if (!blob) return;
         copyToClipboard(blob)
-          .finally(() => {
+          .then(() => {
             alert('已將結果頁存在剪貼簿中，歡迎分享至常用的社群平台！');
+          })
+          .catch(() => {
+            fallbackShare(blob);
+            alert('瀏覽器無法自動複製，請在彈出的圖片上長按或右鍵複製');
           });
       });
     });
@@ -201,7 +206,6 @@
   }
 
   function fallbackShare(blob) {
-    copyToClipboard(blob).catch(() => {});
     const url = URL.createObjectURL(blob);
     const img = document.getElementById('share-preview');
     if (img) {
@@ -209,6 +213,8 @@
       img.style.display = 'block';
     }
     previewUrl = url;
+    const overlay = document.getElementById('share-overlay');
+    if (overlay) overlay.style.display = 'flex';
   }
 
   function shareVia(e) {
