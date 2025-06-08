@@ -141,7 +141,8 @@
   <script>
   let picked = '';
   function showShareOptions() {
-    const url = encodeURIComponent(location.href);
+    const shareUrl = new URL('Index.html', location.href).href;
+    const url = encodeURIComponent(shareUrl);
     const text = encodeURIComponent('我的角色互補配對是 ' + picked);
     document.getElementById('share-fb').href =
       'https://www.facebook.com/sharer/sharer.php?u=' + url +
@@ -328,7 +329,7 @@
       if (emailInput.checkValidity()) {
         if (pdfPath) {
           const tmp = document.createElement('a');
-          tmp.href = pdfPath;
+          tmp.href = encodeURI(pdfPath);
           tmp.download = pdfFileName;
           document.body.appendChild(tmp);
           tmp.click();
