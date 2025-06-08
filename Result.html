@@ -276,8 +276,10 @@
       if (info.img) {
         const m = info.img.match(/Role-(\d+)\.png$/);
         if (m) {
-          pdfPath = 'downloads/Role-' + m[1] + '.pdf';
           pdfFileName = ROLE_FILENAMES[m[1]] || '';
+          if (pdfFileName) {
+            pdfPath = 'downloads/' + pdfFileName;
+          }
         }
       }
     } else {
