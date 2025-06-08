@@ -214,6 +214,26 @@
       "黛西型": {work:"星際大戰", trait:"勇敢、追尋根源", metaphor:"有使命感，在驗證自己是誰", tip:"你不是誰的複製，而是新時代開端", img:"image/Role-16.png"},
       "韓索羅型": {work:"星際大戰", trait:"自由靈魂、重情重義", metaphor:"帥氣獨行，卻渴望為某人返航", tip:"問自己真正想為誰啟航", img:"image/Role-17.png"}
     };
+
+    const ROLE_FILENAMES = {
+      '1': '索隆型｜角色航行地圖.pdf',
+      '2': '喬巴型｜角色航行地圖.pdf',
+      '3': '魯夫型｜角色航行地圖.pdf',
+      '4': '艾莎型｜角色航行地圖.pdf',
+      '5': '安娜型｜角色航行地圖.pdf',
+      '6': '克斯托夫型｜角色航行地圖.pdf',
+      '7': '奧拉夫型｜角色航行地圖.pdf',
+      '8': '哈利型｜角色航行地圖.pdf',
+      '9': '榮恩型｜角色航行地圖.pdf',
+      '10': '露娜型｜角色航行地圖.pdf',
+      '11': '妙麗型｜角色航行地圖.pdf',
+      '12': '巴斯型｜角色航行地圖.pdf',
+      '13': '小叉型｜角色航行地圖.pdf',
+      '14': '翠絲型｜角色航行地圖.pdf',
+      '15': '歐比王型｜角色航行地圖.pdf',
+      '16': '黛西型｜角色航行地圖.pdf',
+      '17': '韓索羅型｜角色航行地圖.pdf'
+    };
     
     function pick(group, tieKey) {
       let max = -1; let winners = [];
@@ -234,6 +254,7 @@
     const result = RESULTS[A + B];
     picked = '';
     let pdfPath = '';
+    let pdfFileName = '';
     if (result) {
       document.getElementById('result-title').textContent = result.title;
       document.getElementById('result-desc').textContent = result.desc;
@@ -256,6 +277,7 @@
         const m = info.img.match(/Role-(\d+)\.png$/);
         if (m) {
           pdfPath = 'downloads/Role-' + m[1] + '.pdf';
+          pdfFileName = ROLE_FILENAMES[m[1]] || '';
         }
       }
     } else {
@@ -277,7 +299,7 @@
         if (pdfPath) {
           const tmp = document.createElement('a');
           tmp.href = pdfPath;
-          tmp.download = '';
+          tmp.download = pdfFileName;
           document.body.appendChild(tmp);
           tmp.click();
           document.body.removeChild(tmp);
