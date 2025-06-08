@@ -144,11 +144,13 @@
     const url = encodeURIComponent(location.href);
     const text = encodeURIComponent('我的角色互補配對是 ' + picked);
     document.getElementById('share-fb').href =
-      'https://www.facebook.com/sharer/sharer.php?u=' + url;
+      'https://www.facebook.com/sharer/sharer.php?u=' + url +
+      '&quote=' + text;
     document.getElementById('share-ig').href = 'https://www.instagram.com/';
     document.getElementById('share-x').href =
       'https://twitter.com/intent/tweet?text=' + text + '&url=' + url;
-    document.getElementById('share-thread').href = 'https://www.threads.net/';
+    document.getElementById('share-thread').href =
+      'https://www.threads.net/share?text=' + text + '&url=' + url;
     document.getElementById('share-overlay').style.display = 'flex';
   }
 
