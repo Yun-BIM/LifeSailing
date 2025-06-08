@@ -141,6 +141,8 @@
   <script>
   let picked = '';
   let previewUrl = '';
+  let shareBlob = null;
+  let shareFile = null;
   function showShareOptions() {
     const shareUrl = new URL('Index.html', location.href).href;
     const url = encodeURIComponent(shareUrl);
@@ -153,6 +155,12 @@
       'https://twitter.com/intent/tweet?text=' + text + '&url=' + url;
     document.getElementById('share-thread').href =
       'https://www.threads.net/share?text=' + text + '&url=' + url;
+    ['fb','ig','x','thread'].forEach(id => {
+      const el = document.getElementById('share-' + id);
+      if (el) {
+        el.addEventListener('click', shareVia, { once: true });
+      }
+    });
     document.getElementById('share-overlay').style.display = 'flex';
   }
 
@@ -165,23 +173,26 @@
       img.style.display = 'none';
       img.src = '';
     }
+    shareBlob = null;
+    shareFile = null;
+    ['fb','ig','x','thread'].forEach(id => {
+      const el = document.getElementById('share-' + id);
+      if (el) el.replaceWith(el.cloneNode(true));
+    });
   }
 
   function shareResult() {
     html2canvas(document.body).then(canvas => {
       canvas.toBlob(blob => {
-        const file = new File([blob], 'result.png', { type: 'image/png' });
-        const shareData = {
-          files: [file],
-          title: '航行配對結果',
-          text: '我的角色互補配對是 ' + picked,
-          url: new URL('Index.html', location.href).href
-        };
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          navigator.share(shareData).catch(() => fallbackShare(blob));
-        } else {
-          fallbackShare(blob);
+        shareBlob = blob;
+        shareFile = new File([blob], 'result.png', { type: 'image/png' });
+        const img = document.getElementById('share-preview');
+        if (img) {
+          previewUrl = URL.createObjectURL(blob);
+          img.src = previewUrl;
+          img.style.display = 'block';
         }
+        showShareOptions();
       });
     });
   }
@@ -203,7 +214,25 @@
       img.style.display = 'block';
     }
     previewUrl = url;
-    showShareOptions();
+  }
+
+  function shareVia(e) {
+    e.preventDefault();
+    const link = e.currentTarget.href;
+    if (shareFile && navigator.canShare && navigator.canShare({ files: [shareFile] })) {
+      navigator.share({
+        files: [shareFile],
+        title: '航行配對結果',
+        text: '我的角色互補配對是 ' + picked,
+        url: new URL('Index.html', location.href).href
+      }).catch(() => {
+        fallbackShare(shareBlob);
+        window.open(link, '_blank');
+      });
+    } else if (shareBlob) {
+      fallbackShare(shareBlob);
+      window.open(link, '_blank');
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
