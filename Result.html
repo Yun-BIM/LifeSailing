@@ -140,6 +140,7 @@
   </div>
   <script>
   let picked = '';
+  let previewUrl = '';
   function showShareOptions() {
     const shareUrl = new URL('Index.html', location.href).href;
     const url = encodeURIComponent(shareUrl);
@@ -157,6 +158,13 @@
 
   function hideShare() {
     document.getElementById('share-overlay').style.display = 'none';
+    const img = document.getElementById('share-preview');
+    if (previewUrl && img) {
+      URL.revokeObjectURL(previewUrl);
+      previewUrl = '';
+      img.style.display = 'none';
+      img.src = '';
+    }
   }
 
   function shareResult() {
@@ -189,13 +197,12 @@
   function fallbackShare(blob) {
     copyToClipboard(blob).catch(() => {});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'result.png';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const img = document.getElementById('share-preview');
+    if (img) {
+      img.src = url;
+      img.style.display = 'block';
+    }
+    previewUrl = url;
     showShareOptions();
   }
 
@@ -415,6 +422,7 @@
   <div id="share-overlay" class="share-overlay">
     <div class="share-buttons">
       <p>選擇要分享的平台：</p>
+      <img id="share-preview" style="display:none;max-width:90%;margin-bottom:1rem;" alt="screenshot preview">
       <a id="share-fb" target="_blank">Facebook</a>
       <a id="share-ig" target="_blank">IG</a>
       <a id="share-x" target="_blank">X</a>
