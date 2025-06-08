@@ -166,7 +166,8 @@
         const shareData = {
           files: [file],
           title: '航行配對結果',
-          text: '我的角色互補配對是 ' + picked
+          text: '我的角色互補配對是 ' + picked,
+          url: new URL('Index.html', location.href).href
         };
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           navigator.share(shareData).catch(() => fallbackShare(blob));
