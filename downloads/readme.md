@@ -28,4 +28,4 @@ The files in `downloads/` were renamed from `Role-<number>.pdf` to Chinese filen
 
 ## Download Logic
 
-Inside `Result.html`, the recommended character image name (e.g. `Role-05.png`) is used to extract a numeric id. The script then constructs `downloads/Role-<id>.pdf` and looks up the Chinese filename from the `ROLE_FILENAMES` table. A temporary anchor is created with this path and filename so the browser downloads the correct PDF.
+Inside `Result.html`, the recommended character image name (e.g. `Role-05.png`) is used to extract a numeric id. The script looks up the Chinese filename from the `ROLE_FILENAMES` table and builds the path `downloads/<filename>` accordingly. A temporary anchor is created with this path so the browser downloads the PDF using the same filename.
