@@ -161,15 +161,27 @@
   function shareResult() {
     html2canvas(document.body).then(canvas => {
       canvas.toBlob(blob => {
-        if (navigator.clipboard && window.ClipboardItem) {
-          const item = new ClipboardItem({'image/png': blob});
-          navigator.clipboard.write([item]).then(showShareOptions)
-            .catch(() => { alert('複製失敗，請自行截圖分享'); showShareOptions(); });
+        const file = new File([blob], 'result.png', { type: 'image/png' });
+        const shareData = {
+          files: [file],
+          title: '航行配對結果',
+          text: '我的角色互補配對是 ' + picked
+        };
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share(shareData).catch(() => copyToClipboard(blob).then(showShareOptions));
         } else {
-          showShareOptions();
+          copyToClipboard(blob).then(showShareOptions).catch(showShareOptions);
         }
       });
     });
+  }
+
+  function copyToClipboard(blob) {
+    if (navigator.clipboard && window.ClipboardItem) {
+      const item = new ClipboardItem({ 'image/png': blob });
+      return navigator.clipboard.write([item]);
+    }
+    return Promise.reject();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
