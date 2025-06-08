@@ -168,9 +168,9 @@
           text: '我的角色互補配對是 ' + picked
         };
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          navigator.share(shareData).catch(() => copyToClipboard(blob).then(showShareOptions));
+          navigator.share(shareData).catch(() => fallbackShare(blob));
         } else {
-          copyToClipboard(blob).then(showShareOptions).catch(showShareOptions);
+          fallbackShare(blob);
         }
       });
     });
@@ -182,6 +182,19 @@
       return navigator.clipboard.write([item]);
     }
     return Promise.reject();
+  }
+
+  function fallbackShare(blob) {
+    copyToClipboard(blob).catch(() => {});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'result.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showShareOptions();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -290,7 +303,8 @@
       if (info.img) {
         const m = info.img.match(/Role-(\d+)\.png$/);
         if (m) {
-          pdfFileName = ROLE_FILENAMES[m[1]] || '';
+          const key = String(parseInt(m[1], 10));
+          pdfFileName = ROLE_FILENAMES[key] || '';
           if (pdfFileName) {
             pdfPath = 'downloads/' + pdfFileName;
           }
