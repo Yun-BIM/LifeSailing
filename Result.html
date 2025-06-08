@@ -184,15 +184,10 @@
   function shareResult() {
     html2canvas(document.body).then(canvas => {
       canvas.toBlob(blob => {
-        shareBlob = blob;
-        shareFile = new File([blob], 'result.png', { type: 'image/png' });
-        const img = document.getElementById('share-preview');
-        if (img) {
-          previewUrl = URL.createObjectURL(blob);
-          img.src = previewUrl;
-          img.style.display = 'block';
-        }
-        showShareOptions();
+        copyToClipboard(blob)
+          .finally(() => {
+            alert('已將結果頁存在剪貼簿中，歡迎分享至常用的社群平台！');
+          });
       });
     });
   }
