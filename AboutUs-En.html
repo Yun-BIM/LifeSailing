@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | LifeSailing Collective</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f7f9fc;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    .navbar .left a {
+      margin-right: 16px;
+      text-decoration: none;
+      color: #1a2b49;
+      font-weight: bold;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 2px 10px;
+      background-color: #fff;
+      font-size: 12px;
+    }
+
+    .lang-toggle .lang {
+      cursor: pointer;
+      padding: 2px 6px;
+      color: #555;
+    }
+
+    .lang-toggle .lang.active {
+      background-color: #1d72f3;
+      color: white;
+      border-radius: 12px;
+    }
+
+    .lang-toggle .divider {
+      margin: 0 6px;
+      color: #999;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 12px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #1a2b49;
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    li {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .creator-note {
+      font-size: 14px;
+      color: #555;
+      background: #f0f4f9;
+      padding: 16px;
+      border-radius: 10px;
+      margin-top: 24px;
+    }
+
+    .creator-note h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="left">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Program</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="right">
+      <div class="lang-toggle">
+        <span class="lang" data-lang="zh">Chinese</span>
+        <span class="divider">|</span>
+        <span class="lang active" data-lang="en">English</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>About Us</h2>
+    <img src="https://tse2.mm.bing.net/th?id=OIP.HMP-NWgqGzJPMY-XuyrK8gHaEJ&pid=Api" alt="sailing boat">
+
+    <h2>Why We Sail</h2>
+    <p>Within each of us sails a vessel. Sometimes it's smooth, sometimes it's lost in fog. But rarely do we stop to ask: Where is this boat truly heading?</p>
+    <p>LifeSailing is a reflective space for navigating the deeper meanings of life. It began with one creator’s personal question: "How do I live without regret, and prepare for the end with peace?" This isn’t just a solo journey—it’s a co-learning circle for those willing to respond to their inner call and re-design life together.</p>
+
+    <h2>Who Is This For?</h2>
+    <ul>
+      <li>Those at a life crossroads, seeking new direction</li>
+      <li>Those exhausted and needing to reestablish inner order</li>
+      <li>Self-aware, curious learners who value reflection</li>
+      <li>Midlife thinkers planning ahead for a meaningful path</li>
+      <li>People who've healed themselves and wish to support others</li>
+    </ul>
+
+    <h2>What You’ll Gain</h2>
+    <ul>
+      <li>A fresh understanding of your life structure and inner drive</li>
+      <li>Your own life map sketch, built from within</li>
+      <li>Weekly guided practice and deep dialogue in a support circle</li>
+      <li>Practical tools for awareness and habits (like Compass Review templates)</li>
+      <li>An honest learning space free from urgency or performance pressure</li>
+    </ul>
+
+    <h2>Ways You Can Grow Further</h2>
+    <ul>
+      <li>Become a future co-facilitator of the journey</li>
+      <li>Translate the model into your own coaching or helping work</li>
+      <li>Extend your practice into action plans and growth dashboards</li>
+      <li>Transform your life story into creative work or publications</li>
+    </ul>
+
+    <div class="creator-note">
+      <h3>About the Model Creator</h3>
+      <p>I’m not a teacher, just another person learning to steer while out at sea. This model comes from my lived questions and experiments, which I now offer for co-creation.</p>
+      <p>If it helps you see yourself more clearly, then this voyage is already worthwhile.</p>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.lang-toggle .lang').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.lang-toggle .lang').forEach(lang => lang.classList.remove('active'));
+        el.classList.add('active');
+        // language switch logic can be added here
+      });
+    });
+  </script>
+
+</body>
+</html>

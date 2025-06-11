@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LifeSailing Program</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .navbar .left a {
+      margin-right: 16px;
+      text-decoration: none;
+      color: #1a2b49;
+      font-weight: bold;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 2px 10px;
+      background-color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .lang-toggle .lang {
+      cursor: pointer;
+      padding: 2px 6px;
+      color: #555;
+    }
+
+    .lang-toggle .lang.active {
+      background-color: #1d72f3;
+      color: white;
+      border-radius: 12px;
+    }
+
+    .lang-toggle .divider {
+      margin: 0 6px;
+      color: #999;
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .content {
+      padding: 24px 20px;
+      text-align: left;
+    }
+
+    .content h1 {
+      font-size: 22px;
+      color: #1a2b49;
+      margin-bottom: 12px;
+    }
+
+    .content p, .content ul {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    .content ul {
+      padding-left: 20px;
+    }
+
+    .btn {
+      display: block;
+      width: calc(100% - 40px);
+      margin: 24px auto;
+      padding: 12px;
+      background-color: #1d72f3;
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact {
+      padding: 24px 20px;
+      text-align: left;
+      background-color: #f0f4f8;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .contact h2 {
+      font-size: 17px;
+      color: #1a2b49;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="left">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Program</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="right">
+      <div class="lang-toggle">
+        <span class="lang" data-lang="zh">繁體中文</span>
+        <span class="divider">|</span>
+        <span class="lang active" data-lang="en">English</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <img class="image" src="https://tse2.mm.bing.net/th?id=OIP.a_r3jkfFQstT3I2FuHyt6wHaJQ&pid=Api" alt="minimal sailing boat at sunrise">
+    <div class="content">
+      <h1>LifeSailing Co-Learning Program</h1>
+      <p><strong>A progressive journey of self re-alignment</strong></p>
+      <p>This is an 8-week guided learning experience. Each week, you'll engage in small but powerful practices, deep questions, and shared conversations—designed to help you gradually uncover the structure and rhythm of your life.</p>
+      <p>You don't need to have all the answers. You don’t even need to be “ready.” You just need to be willing to pause—and truly meet yourself where you are.</p>
+      <p><strong>During this journey, you will:</strong></p>
+      <ul>
+        <li>Complete a personalized “Life Navigation Map” based on your current situation</li>
+        <li>Gain access to a proven, structured LifeSailing framework</li>
+        <li>Work through 8 core modules aligned with your real-life themes</li>
+        <li>Participate in weekly guided reflections and journaling</li>
+        <li>Join a small group for open exchange, support, and feedback</li>
+        <li>Discover your unique value priorities, sources of motivation, and decision-making patterns</li>
+        <li>Experience a pace that honors your process—not urgency or metrics</li>
+        <li>Optionally extend your practice with action maps, growth dashboards, or facilitation roles</li>
+      </ul>
+      <a class="btn" href="#">Join us for 8 weeks to begin shaping your own life navigation map</a>
+    </div>
+    <div class="contact">
+      <h2>Contact Us</h2>
+      <p>If this vessel calls to you, if this path resonates—leave us a message and let us send the first invitation to your harbor.</p>
+      <p>📧 Email｜wywu170@gmail.com<br>
+         🌐 IG / FB｜yun.bim.2025<br>
+         📆 Next cohort registration｜(To be announced)</p>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.lang-toggle .lang').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.lang-toggle .lang').forEach(lang => lang.classList.remove('active'));
+        el.classList.add('active');
+        // Optional: redirect logic
+      });
+    });
+  </script>
+
+</body>
+</html>
